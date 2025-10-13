@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>SUPERHERO Spike — 1h (Recent Futures ≤90d)</title>
+  <title>SUPERHERO Spike — 1h (Recent ≤6M)</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
@@ -39,27 +39,21 @@
     .dot.red   { background:#ff3366; }
     .note { color:#888; font-size:12px; margin-bottom: 8px; }
 
-    .badge {
-      display:inline-block; padding:2px 8px; border-radius:999px; font-size:11px; font-weight:700;
-      background:#222; color:#9ddcff; border:1px solid #1a3a55; margin-left:8px;
-      transform: translateY(-2px);
-    }
-
     a.link { color:#8ad8ff; text-decoration: none; }
     a.link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <h1>■ SUPERHERO — 1시간 급등 랭킹 (신규코인) ■ <span class="badge">상장 ≤ 90일</span></h1>
+  <h1>■ SUPERHERO — 1시간 급등 랭킹 (신규 ≤6개월) ■</h1>
   <div class="sub">
+    대상: 바이낸스 USDT 무기한 선물 상장 후 <strong>≤ 180일(6개월)</strong> 코인<br/>
     기준식: <strong>((현재가 − 최근 60분 저가) / 최근 60분 저가) × 100%</strong> &nbsp;|&nbsp;
-    대상: Binance USDT Perpetual 상장 후 90일 이내 종목 &nbsp;|&nbsp;
     데이터: 1분봉 × 60개 (1분 갱신)
   </div>
 
   <div class="legend">
-    <div><span class="dot green"></span>pump 강함</div>
-    <div><span class="dot red"></span>pump 약함 (range 대비)</div>
+    <div><span class="dot green"></span>spike 강함</div>
+    <div><span class="dot red"></span>spike 약함 (range 대비)</div>
     <div class="note">라벨 클릭 시 바이낸스 선물 차트로 이동</div>
   </div>
 
@@ -67,10 +61,10 @@
     UTC 시간 로딩 중... <span id="countdown">다음 갱신까지 60s</span>
   </div>
 
-  <svg id="chart" width="1100" height="1300" aria-label="spike ranking chart (recent)"></svg>
+  <svg id="chart" width="1100" height="1300" aria-label="recent spike ranking chart"></svg>
 
   <script>
-    // 🔗 API 엔드포인트 (Railway)
+    // 🔗 API 엔드포인트 (Railway) — 신규(≤6개월) 급등
     const API_URL = "https://binance-flask-app-production.up.railway.app/top_spike_1h_recent";
 
     // ───────────────── 레이아웃 파라미터 ─────────────────
@@ -308,7 +302,7 @@
     setInterval(updateChart, 60 * 1000);
     startCountdown();
 
-    // 모바일 대응: 화면 크기에 따라 scale 자동 조정(선택)
+    // 모바일 대응: 화면 크기에 따라 scale 자동 조정
     const mq = window.matchMedia("(max-width: 768px)");
     function applyScale() {
       document.documentElement.style.setProperty("--scale", mq.matches ? "0.52" : "0.65");
