@@ -6,7 +6,7 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    :root { --scale: 0.7; }
+    :root { --scale: 0.65; }
 
     html, body {
       margin: 0;
@@ -303,12 +303,7 @@
     startCountdown();
 
     // 모바일 대응: 화면 크기에 따라 scale 자동 조정
-    const mq = window.matchMedia("(max-width: 768px)");
-    function applyScale() {
-      document.documentElement.style.setProperty("--scale", mq.matches ? "0.52" : "0.65");
-    }
-    applyScale();
-    mq.addEventListener("change", applyScale);
+    
   </script>
 </body>
 </html>
